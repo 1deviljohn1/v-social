@@ -3,13 +3,15 @@ import firebase from 'firebase/app'
 export default {
   state: {
     currentUserData: {},
-    profileUserData: {}
+    profileUserData: {},
+    usersCount: null
   },
 
   getters: {
     currentUserData: (state) => state.currentUserData,
     userSubscriptions: (state) => state.currentUserData.subscriptions,
-    profileUserData: (state) => state.profileUserData
+    profileUserData: (state) => state.profileUserData,
+    usersCount: (state) => state.usersCount
   },
 
   mutations: {
@@ -18,6 +20,9 @@ export default {
     },
     setProfileUserData(state, data) {
       state.profileUserData = data
+    },
+    setUsersCount(state, usersCount) {
+      state.usersCount = usersCount
     }
   },
 
@@ -132,6 +137,13 @@ export default {
         .update({
           subscriptions: subArr
         })
+    },
+    async fetchUsersCount({ commit }) {
+      const db = firebase.firestore()
+      const statsRef = db.collection('stats').doc('users')
+      const usersNumber = (await statsRef.get()).data().userCount
+
+      commit('setUsersCount', usersNumber)
     }
   }
 }

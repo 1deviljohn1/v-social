@@ -1,12 +1,15 @@
 <template>
   <div class="auth">
     <img class="auth-logo" src="@/assets/images/logo-main.svg" alt="" />
+
     <div class="card">
       <div class="card-content">
         <LoginForm v-if="login" @toggleForm="toggleForm" />
         <SigninForm v-else @toggleForm="toggleForm" />
       </div>
     </div>
+
+    <blockquote v-if="usersCount">Зарегистрировано пользователей: {{ usersCount }}</blockquote>
   </div>
 </template>
 
@@ -14,7 +17,7 @@
 import M from 'materialize-css'
 import LoginForm from '@/components/auth/LoginForm'
 import SigninForm from '@/components/auth/SigninForm'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Auth',
@@ -29,12 +32,17 @@ export default {
   },
   methods: {
     ...mapMutations(['setAuthCode']),
+    ...mapActions(['fetchUsersCount']),
     toggleForm() {
       this.login = !this.login
       this.setAuthCode('')
     }
   },
+  computed: {
+    ...mapGetters(['usersCount'])
+  },
   mounted() {
+    this.fetchUsersCount()
     M.updateTextFields()
   }
 }

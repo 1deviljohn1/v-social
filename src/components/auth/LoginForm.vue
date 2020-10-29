@@ -9,7 +9,9 @@
 
       <div class="input-field col s12">
         <i class="material-icons prefix">lock</i>
-        <i @click="showPassword = !showPassword" class="material-icons prefix prefix-right grey-text">{{ togglePassword }}</i>
+        <i @click="showPassword = !showPassword" class="material-icons prefix prefix-right grey-text">
+          {{ togglePassword }}
+        </i>
         <input id="login_password" :type="showPassword ? 'text' : 'password'" v-model.trim="password" />
         <label for="login_password">Пароль</label>
       </div>

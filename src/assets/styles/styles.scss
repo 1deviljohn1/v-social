@@ -45,3 +45,7 @@ input[type='password']:not(.browser-default):focus:not([readonly]) {
     color: $main_color;
   }
 }
+
+blockquote {
+  border-left: 5px solid $main_color;
+}
