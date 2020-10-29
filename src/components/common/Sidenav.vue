@@ -5,6 +5,7 @@
       <router-link :to="{ name: 'Profile', params: { alias: currentUserData.alias } }" class="collection-item"
         ><i class="material-icons">account_circle</i>Профиль</router-link
       >
+      <router-link to="/messages" class="collection-item"><i class="material-icons">chat</i>Мессенджер</router-link>
       <router-link to="/users" class="collection-item"><i class="material-icons">people</i>Люди</router-link>
     </ul>
   </div>

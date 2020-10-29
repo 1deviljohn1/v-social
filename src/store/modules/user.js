@@ -141,9 +141,12 @@ export default {
     async fetchUsersCount({ commit }) {
       const db = firebase.firestore()
       const statsRef = db.collection('stats').doc('users')
-      const usersNumber = (await statsRef.get()).data().userCount
+      const usersNumber = (await statsRef.get())
 
-      commit('setUsersCount', usersNumber)
+      if (usersNumber.data()) {
+        commit('setUsersCount', usersNumber.data().userCount)
+      }
+
     }
   }
 }

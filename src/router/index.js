@@ -7,6 +7,7 @@ import Profile from '@/views/Profile'
 import Home from '@/views/Home'
 import Users from '@/views/Users'
 import Chat from '@/views/Chat'
+import Messages from '@/views/Messages'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,12 @@ const routes = [
     path: '/chat/:alias',
     name: 'Chat',
     component: Chat,
+    meta: { requireAuth: true }
+  },
+  {
+    path: '/messages',
+    name: 'Messages',
+    component: Messages,
     meta: { requireAuth: true }
   },
   {

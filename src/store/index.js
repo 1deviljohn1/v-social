@@ -4,6 +4,7 @@ import auth from './modules/auth'
 import user from './modules/user'
 import post from './modules/post'
 import chat from './modules/chat'
+import messages from './modules/messages'
 
 Vue.use(Vuex)
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     auth,
     user,
     post,
-    chat
+    chat,
+    messages
   }
 })
