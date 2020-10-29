@@ -1,0 +1,16 @@
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="26" width="26" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_2" stroke-width="1.9091" stroke-miterlimit="10" stroke="#00796b" fill="none" d="m9.232,15.786c-0.029,0.01 -0.067,0.01 -0.095,0.01c-1.069,0 -2.081,-0.191 -3.007,-0.535l-0.811,0.535l0,-0.897c-2.282,-1.146 -3.819,-3.313 -3.819,-5.785c0,-3.694 3.417,-6.682 7.636,-6.682s7.636,2.988 7.636,6.682c0,0.019 0,0.048 0,0.067"/>
+  <path fill-opacity="0" id="svg_3" stroke-width="1.9091" stroke-miterlimit="10" stroke="#00796b" fill="#00796b" d="m22.5,14.841c0,1.947 -1.126,3.665 -2.864,4.687l0,1.04l-0.878,-0.582c-0.888,0.372 -1.88,0.582 -2.94,0.582c-3.694,0 -6.682,-2.568 -6.682,-5.727s2.988,-5.727 6.682,-5.727s6.682,2.567 6.682,5.727z"/>
+  <circle fill="#00796b" id="svg_4" r="0.955" cy="7.205" cx="6.273"/>
+  <circle fill="#00796b" id="svg_5" r="0.955" cy="7.205" cx="12"/>
+  <circle fill="#00796b" id="svg_6" r="0.955" cy="13.886" cx="12.955"/>
+  <circle fill="#00796b" id="svg_7" r="0.955" cy="13.886" cx="18.682"/>
+ </g>
+</svg>

@@ -1,0 +1,47 @@
+@import 'variables.scss';
+@import 'helpers.scss';
+
+body {
+  background: $main_color_bg;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+
+// override materialize styles
+.card {
+  border-radius: 20px;
+}
+
+.preloader-wrapper .spinner-layer {
+  border-color: $main_color;
+}
+
+.collection a.collection-item,
+.dropdown-content li > a,
+.dropdown-content li > span {
+  color: $link_color;
+}
+
+.btn {
+  background-color: $main_color;
+}
+.input-field .prefix.active {
+  color: $main_color;
+}
+
+input[type='text']:not(.browser-default):focus:not([readonly]),
+input[type='password']:not(.browser-default):focus:not([readonly]) {
+  border-bottom: 1px solid $main_color;
+  box-shadow: 0 1px 0 0 $main_color;
+
+  + label {
+    color: $main_color;
+  }
+}
