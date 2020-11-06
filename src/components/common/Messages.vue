@@ -36,7 +36,7 @@ import M from 'materialize-css'
 
 export default {
   name: 'Messages',
-  props: ['messages'],
+  props: ['messages', 'destination'],
   data() {
     return {
       message: ''
@@ -58,7 +58,7 @@ export default {
       const messageData = {
         message: this.message,
         from: this.currentUserData.alias,
-        to: this.$route.params.alias
+        to: this.destination
       }
 
       this.message = ''
@@ -75,13 +75,14 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .message-form {
   margin-top: 20px;
 }
 
 .messages-wrapper {
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }

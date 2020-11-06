@@ -3,7 +3,7 @@
     <ComponentLoader v-if="isComponentLoading" />
     <div v-else class="chat card">
       <div class="card-content">
-        <Messages :messages="messages" />
+        <Messages :messages="messages" :destination="this.$route.params.alias" />
       </div>
     </div>
   </div>

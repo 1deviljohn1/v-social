@@ -1,24 +1,25 @@
 <template>
-  <div class="messages">
+  <div class="messenger">
     <ComponentLoader v-if="isComponentLoading" />
     <div v-else class="card">
       <div v-if="users.length" class="card-content">
         <div class="users-list">
           <div
             class="user"
-            :class="{ selected: i === selectedChat }"
-            @click="openChat(i)"
-            v-for="(user, i) in users"
+            :class="{ selected: user.alias === selectedChat }"
+            @click="openChat(user.alias)"
+            v-for="user in users"
             :key="user.id"
           >
             <Badge :photoUrl="user.photoUrl" :alias="user.alias" :invertColor="true" />
             <p class="center-align">{{ user.alias }}</p>
           </div>
         </div>
-        <div class="users-messages">
+        <div v-if="!selectedChat" class="users-messages">
           <img :src="require('@/assets/images/empty_icon.png')" alt="" />
           <p>Выберите чат</p>
         </div>
+        <Messages v-else :messages="messages" :destination="selectedChat" />
       </div>
       <div v-else class="card-content no-messages">
         <img :src="require('@/assets/images/empty_icon.png')" alt="" />
@@ -29,9 +30,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Badge from '@/components/common/Badge'
 import ComponentLoader from '@/components/common/ComponentLoader'
+import Messages from '@/components/common/Messages'
 
 export default {
   name: 'Messenger',
@@ -45,13 +47,23 @@ export default {
   },
   components: {
     Badge,
-    ComponentLoader
+    ComponentLoader,
+    Messages
+  },
+  computed: {
+    ...mapGetters(['currentUserData', 'messages'])
   },
   methods: {
-    ...mapActions(['fetchUsersFromMessages', 'fetchUsers']),
-    openChat(alias) {
-      console.log(alias)
+    ...mapActions(['fetchUsersFromMessages', 'fetchUsers', 'fetchMessages']),
+    async openChat(alias) {
       this.selectedChat = alias
+
+      const chatMembers = {
+        from: this.currentUserData.alias,
+        to: alias
+      }
+
+      await this.fetchMessages(chatMembers)
     }
   },
   async mounted() {
@@ -66,11 +78,18 @@ export default {
 </script>
 
 <style lang="scss">
-.messages {
+.messenger {
+  .messages-wrapper {
+    padding: 20px;
+  }
+
   .card {
+    height: calc(100vh - 100px);
+
     .card-content {
       padding: 0;
       display: flex;
+      height: 100%;
 
       &.no-messages {
         align-items: center;
