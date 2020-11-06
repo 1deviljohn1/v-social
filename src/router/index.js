@@ -7,7 +7,7 @@ import Profile from '@/views/Profile'
 import Home from '@/views/Home'
 import Users from '@/views/Users'
 import Chat from '@/views/Chat'
-import Messages from '@/views/Messages'
+import Messenger from '@/views/Messenger'
 
 Vue.use(VueRouter)
 
@@ -37,9 +37,9 @@ const routes = [
     meta: { requireAuth: true }
   },
   {
-    path: '/messages',
-    name: 'Messages',
-    component: Messages,
+    path: '/messenger',
+    name: 'Messenger',
+    component: Messenger,
     meta: { requireAuth: true }
   },
   {

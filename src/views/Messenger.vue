@@ -2,10 +2,16 @@
   <div class="messages">
     <ComponentLoader v-if="isComponentLoading" />
     <div v-else class="card">
-      <div class="card-content">
+      <div v-if="users.length" class="card-content">
         <div class="users-list">
-          <div class="user" @click="openChat(user.alias)" v-for="user in users" :key="user.id">
-            <Badge :size="100" :photoUrl="user.photoUrl" :alias="user.alias" :invertColor="true" />
+          <div
+            class="user"
+            :class="{ selected: i === selectedChat }"
+            @click="openChat(i)"
+            v-for="(user, i) in users"
+            :key="user.id"
+          >
+            <Badge :photoUrl="user.photoUrl" :alias="user.alias" :invertColor="true" />
             <p class="center-align">{{ user.alias }}</p>
           </div>
         </div>
@@ -13,6 +19,10 @@
           <img :src="require('@/assets/images/empty_icon.png')" alt="" />
           <p>Выберите чат</p>
         </div>
+      </div>
+      <div v-else class="card-content no-messages">
+        <img :src="require('@/assets/images/empty_icon.png')" alt="" />
+        <p>У вас пока нет сообщений</p>
       </div>
     </div>
   </div>
@@ -24,12 +34,13 @@ import Badge from '@/components/common/Badge'
 import ComponentLoader from '@/components/common/ComponentLoader'
 
 export default {
-  name: 'Messages',
+  name: 'Messenger',
   data() {
     return {
       users: [],
       aliases: [],
-      isComponentLoading: false
+      isComponentLoading: false,
+      selectedChat: false
     }
   },
   components: {
@@ -40,12 +51,15 @@ export default {
     ...mapActions(['fetchUsersFromMessages', 'fetchUsers']),
     openChat(alias) {
       console.log(alias)
+      this.selectedChat = alias
     }
   },
   async mounted() {
     this.isComponentLoading = true
     this.aliases = await this.fetchUsersFromMessages()
-    this.users = await this.fetchUsers(this.aliases)
+    if (this.aliases.length) {
+      this.users = await this.fetchUsers(this.aliases)
+    }
     this.isComponentLoading = false
   }
 }
@@ -57,6 +71,13 @@ export default {
     .card-content {
       padding: 0;
       display: flex;
+
+      &.no-messages {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 40px;
+      }
     }
 
     .users-list {
@@ -71,6 +92,10 @@ export default {
 
         &:last-child {
           border: 0;
+        }
+
+        &.selected {
+          background: $active_color_bg;
         }
       }
     }
